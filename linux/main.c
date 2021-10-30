@@ -16,18 +16,20 @@ int main(void){
     profile;
     //opening database
     FILE *db = fopen("database.csv","a");
+    if(db == NULL){
+        printf("Some error opening file\n");
+        return 1;
+    }
     //creating a temp profile
     profile temp;
     //losi function
     int a = 0;
     while(a==0){
         char losi;
-        
         printf("(L)ogin\n(S)ignup\n");
         scanf("%c",&losi);
         losi = tolower(losi);
         if(losi == 'l'){
-            
             printf("Username:- ");
             scanf("%s", &temp.username);
             printf("Password:- ");
@@ -35,7 +37,6 @@ int main(void){
             a++;
         }
         else if(losi == 's'){
-            
             printf("Name:- ");
             scanf("%s", &temp.name);
             printf("Username:- ");
