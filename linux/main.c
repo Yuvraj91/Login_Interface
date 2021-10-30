@@ -5,8 +5,10 @@
 #include <ncurses.h>
 #include <ctype.h>
 #include <stdbool.h>
+
 //main
 int main(void){
+
     //custom data structure
     typedef struct{
         char *username;
@@ -14,18 +16,22 @@ int main(void){
         char *name;
     }
     profile;
+    
     //opening database
     FILE *db = fopen("database.csv","a");
     if(db == NULL){
         printf("Some error opening file\n");
         return 1;
     }
+    
     //creating a temp profile
     profile temp;
+    
     //losi function
     int a = 0;
     while(a==0){
         char losi;
+        char read[59];
         printf("(L)ogin\n(S)ignup\n");
         scanf("%c",&losi);
         losi = tolower(losi);
@@ -35,6 +41,18 @@ int main(void){
             printf("Password:- ");
             scanf("%s", &temp.password);
             a++;
+            char *temp1 = "";
+            while(fgets( read, 59, db) != NULL){
+                for(int i = 0, n = strlen(read); i < n ; i++){
+                    if(read[i] == " "){
+                        break;
+                    }
+                    temp1[i] = read[i]; 
+                }
+                if(strcmp(temp1, *temp.username) == 0){
+                    printf("Username found\n");
+                }
+            }
         }
         else if(losi == 's'){
             printf("Name:- ");
@@ -47,5 +65,5 @@ int main(void){
         }
     }
 
-    printf("%s %s %s", &temp.name, &temp.username, &temp.password);
+    printf("%s %s", &temp.username, &temp.password);
 }
