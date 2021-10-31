@@ -41,15 +41,16 @@ int main(void){
             printf("Password:- ");
             scanf("%s", &temp.password);
             a++;
-            char *temp1 = "";
-            while(fgets( read, 59, db) != NULL){
+            char temp1[59];
+            while(fgets(read, 59, db) != NULL){
+                puts(read);
                 for(int i = 0, n = strlen(read); i < n ; i++){
-                    if(read[i] == " "){
+                    if(read[i] == 32){
                         break;
                     }
-                    temp1[i] = read[i]; 
+                    temp1[i] = (char)read[i]; 
                 }
-                if(strcmp(temp1, *temp.username) == 0){
+                if(strcmp(temp1, temp.username) == 0){
                     printf("Username found\n");
                 }
             }
