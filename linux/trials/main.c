@@ -29,13 +29,6 @@ char losi(void){
     return losi;
 }
 int main(void){
-    //opening database
-    FILE *db = fopen("database.csv","a");
-    if(db == NULL){
-        printf("Some error opening file\n");
-        return 1;
-    }
-
     //custom data-structure for profile
     typedef struct
     {
@@ -47,11 +40,11 @@ int main(void){
 
     //Welcome Screen for 5 seconds
     welcome();
-    
+    char a;
     //login and signup prompt
     do
     {
-        char a = losi();
+        a = losi();
 
         if(a == 'l'){
             printf("username:- ");
@@ -72,5 +65,42 @@ int main(void){
         }
     
     }while(1);
-    
+    if(a == 'l'){
+        //opening database
+        FILE *db = fopen("database.csv","r");
+        //exceptional handling
+        if(db == NULL){
+            printf("Some error opening file\n");
+            return 1;
+        }
+        //buffer for read
+        char buffer[42];
+
+        int row = -1;
+        int column = 0;
+        while(fgets(buffer, 42, db)){
+            column = 0;
+            row++;
+            char *data = strtok(buffer, ", ");
+            while(data){
+                if(column == 0){
+                    fprintf(db,)
+                }
+            }
+        }
+    }
+    else{
+        //opening database
+        FILE *db = fopen("database.csv","a");
+        //exceptional handling
+        if(db == NULL){
+            printf("Some error opening file\n");
+            return 1;
+        }
+        //buffer for write
+        char buffer[42];
+
+    }
+
+
 }
