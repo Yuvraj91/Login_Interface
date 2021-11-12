@@ -112,6 +112,4 @@ int main(void){
         char buffer[42];
         fclose(db);
     }
-
-
 }
