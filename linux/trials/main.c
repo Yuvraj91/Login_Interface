@@ -85,10 +85,13 @@ int main(void){
             char *data = strtok(buffer, ", ");
             while(data){
                 if(column == 0){
-                    printf("%s ",data);
-                }
-                if(column == 1){
-                    printf("%s ",data);
+                    if(strcmp(data,template_profile.username) == 0){
+                        data = strtok(NULL,", ");
+                        if(strcmp(data, template_profile.password)){
+                            printf("You now logged in as %s\n",template_profile.username);
+                            return 0;
+                        }
+                    }
                 }
                 data = strtok(NULL,", ");
                 column++;
