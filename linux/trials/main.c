@@ -66,6 +66,8 @@ int main(void){
         }
     
     }while(1);
+
+    
     if(a == 'l'){
         //opening database
         FILE *db = fopen("database.csv","r");
@@ -84,19 +86,16 @@ int main(void){
             row++;
             char *data = strtok(buffer, ", ");
             while(data){
-                if(column == 0){
-                    if(strcmp(data,template_profile.username) == 0){
-                        data = strtok(NULL,", ");
-                        if(strcmp(data, template_profile.password)){
-                            printf("You are now logged in as %s\n",template_profile.username);
-                            return 0;
-                        }
+                if(strcmp(data,template_profile.username) == 0){
+                    data = strtok(NULL,", ");
+                    if(strcmp(data, template_profile.password) == 0){
+                        printf("You are now logged in as %s\n",template_profile.username);
+                        return 0;
+                
                     }
                 }
                 data = strtok(NULL,", ");
-                column++;
             }
-            printf("\n");
         }
         fclose(db);
         return 0;
@@ -111,7 +110,7 @@ int main(void){
         }
         //buffer for write
         char buffer[42];
-
+        fclose(db);
     }
 
 
