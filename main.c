@@ -3,6 +3,10 @@
 #include <time.h>
 #include <ctype.h>
 #include <string.h>
+
+
+
+
 void delay(int number_of_seconds)
 {
     // Converting time into milli_seconds
@@ -15,11 +19,16 @@ void delay(int number_of_seconds)
     while (clock() < start_time + milli_seconds);
 }
 
+
+
+
 void welcome(void){
     printf("Welcome\n");
     delay(5000);
     system("clear");
 }
+
+
 
 char losi(void){
     system("clear");
@@ -27,8 +36,13 @@ char losi(void){
     char losi;
     scanf("%c",&losi);
     losi = tolower(losi);
+    system("clear");
     return losi;
 }
+
+
+
+
 int main(void){
     //custom data-structure for profile
     typedef struct
@@ -67,7 +81,8 @@ int main(void){
     
     }while(1);
 
-    
+    system("clear");
+
     if(a == 'l'){
         //opening database
         FILE *db = fopen("database.csv","r");
@@ -91,8 +106,15 @@ int main(void){
                     if(strcmp(data, template_profile.password) == 0){
                         printf("You are now logged in as %s\n",template_profile.username);
                         return 0;
-                
                     }
+                    else{
+                        printf("Either the password or the username is not correct");
+                        return 0;
+                    }
+                }
+                else{
+                    printf("Either the password or the username is not correct");
+                    return 0;
                 }
                 data = strtok(NULL,", ");
             }
@@ -102,14 +124,32 @@ int main(void){
     }
     else{
         //opening database
-        FILE *db = fopen("database.csv","a");
+        FILE *db = fopen("database.csv","r+");
         //exceptional handling
         if(db == NULL){
             printf("Some error opening file\n");
             return 1;
         }
-        //buffer for write
+        //buffer for reading
         char buffer[42];
+
+        int row = -1;
+
+        while(fgets(buffer, 42, db)){
+            row++;
+            char *data = strtok(buffer, ", ");
+            while(data){
+                if(strcmp(data,template_profile.username) == 0){
+                    printf("Username already exits");
+                    return 0;
+                }
+                data = strtok(NULL,", ");
+            }
+        }
+        
+        fprintf(db, "\n%s, %s,",template_profile.username, template_profile.password);
+        printf("Account created\n");
+        
         fclose(db);
     }
 }
