@@ -88,7 +88,7 @@ int main(void){
                     if(strcmp(data,template_profile.username) == 0){
                         data = strtok(NULL,", ");
                         if(strcmp(data, template_profile.password)){
-                            printf("You now logged in as %s\n",template_profile.username);
+                            printf("You are now logged in as %s\n",template_profile.username);
                             return 0;
                         }
                     }
