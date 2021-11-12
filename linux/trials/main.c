@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <ctype.h>
+#include <string.h>
 void delay(int number_of_seconds)
 {
     // Converting time into milli_seconds
@@ -84,10 +85,18 @@ int main(void){
             char *data = strtok(buffer, ", ");
             while(data){
                 if(column == 0){
-                    fprintf(db,)
+                    printf("%s ",data);
                 }
+                if(column == 1){
+                    printf("%s ",data);
+                }
+                data = strtok(NULL,", ");
+                column++;
             }
+            printf("\n");
         }
+        fclose(db);
+        return 0;
     }
     else{
         //opening database
