@@ -22,10 +22,11 @@ void delay(int number_of_seconds)
 
 
 
-void welcome(void){
+int welcome(void){
     printf("Welcome\n");
     delay(5000);
     system("clear");
+    return 0;
 }
 
 
@@ -52,9 +53,6 @@ int main(void){
     }
     profile;
     profile template_profile;
-
-    //Welcome Screen for 5 seconds
-    welcome();
     char a;
     //login and signup prompt
     do
@@ -111,10 +109,6 @@ int main(void){
                         printf("Either the password or the username is not correct");
                         return 0;
                     }
-                }
-                else{
-                    printf("Either the password or the username is not correct");
-                    return 0;
                 }
                 data = strtok(NULL,", ");
             }
